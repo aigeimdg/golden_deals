@@ -82,9 +82,9 @@ export default function AdminPage() {
     setIsModalOpen(false);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this deal?')) {
-      deleteDeal(id);
+      await deleteDeal(id);
     }
   };
 

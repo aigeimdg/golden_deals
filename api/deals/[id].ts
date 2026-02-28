@@ -39,10 +39,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === 'DELETE') {
     try {
+      console.log(`Attempting to delete deal with ID: ${id}`);
       const result = await db.execute({
         sql: 'DELETE FROM deals WHERE id = ?',
         args: [Number(id)]
       });
+      console.log(`Delete result:`, result);
       
       if (result.rowsAffected > 0) {
         return res.status(200).json({ message: 'Deal deleted successfully' });

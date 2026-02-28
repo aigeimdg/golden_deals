@@ -136,14 +136,22 @@ export function DealsProvider({ children }: { children: React.ReactNode }) {
 
   const deleteDeal = async (id: number) => {
     try {
+      console.log(`Deleting deal with ID: ${id}`);
       const response = await fetch(`/api/deals/${id}`, {
         method: 'DELETE',
       });
+      
       if (response.ok) {
+        console.log(`Successfully deleted deal ${id}`);
         setDeals((prevDeals) => prevDeals.filter(deal => deal.id !== id));
+      } else {
+        const errorText = await response.text();
+        console.error(`Failed to delete deal ${id}:`, response.status, errorText);
+        alert(`Failed to delete deal. Server returned: ${response.status}`);
       }
     } catch (error) {
       console.error('Error deleting deal:', error);
+      alert('Failed to delete deal due to network error.');
     }
   };
 
