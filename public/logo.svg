@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" rx="60" fill="white"/>
+  <path d="M100 150 L300 150 L320 300 L80 300 Z" fill="#f8f9fa" stroke="#d4af37" stroke-width="4"/>
+  <path d="M140 150 Q200 50 260 150" fill="none" stroke="#d4af37" stroke-width="8" stroke-linecap="round"/>
+  <path d="M160 130 L180 90 L200 120 L220 90 L240 130 Z" fill="#d4af37"/>
+  <text x="200" y="340" font-family="Arial, sans-serif" font-weight="bold" font-size="40" text-anchor="middle" fill="#b8860b">GOLDEN DEAL</text>
+  <text x="200" y="380" font-family="Arial, sans-serif" font-weight="bold" font-size="50" text-anchor="middle" fill="#0f172a">HUB</text>
+</svg>
