@@ -13,7 +13,17 @@ export default function DealsPage() {
   const [isFilterOpen, setIsFilterOpen] = React.useState(false);
   const [isSortOpen, setIsSortOpen] = React.useState(false);
   const [sortBy, setSortBy] = React.useState('Recommended');
+  const maxPrice = useMemo(() => {
+    if (deals.length === 0) return 1000;
+    return Math.ceil(Math.max(...deals.map(d => d.dealPrice)));
+  }, [deals]);
+
   const [priceRange, setPriceRange] = React.useState<[number, number]>([0, 1000]);
+
+  // Update price range when max price changes
+  React.useEffect(() => {
+    setPriceRange([0, maxPrice]);
+  }, [maxPrice]);
 
   // Close dropdowns when clicking outside
   React.useEffect(() => {
@@ -119,7 +129,7 @@ export default function DealsPage() {
                     <input 
                       type="range" 
                       min="0" 
-                      max="1000" 
+                      max={maxPrice} 
                       step="10"
                       value={priceRange[1]}
                       onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
@@ -127,7 +137,7 @@ export default function DealsPage() {
                     />
                     <div className="flex justify-end">
                       <button 
-                        onClick={() => setPriceRange([0, 1000])}
+                        onClick={() => setPriceRange([0, maxPrice])}
                         className="text-xs text-amber-600 hover:text-amber-700 font-medium"
                       >
                         Reset

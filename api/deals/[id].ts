@@ -23,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       
       const result = await db.execute({
         sql: `UPDATE deals SET ${setClause} WHERE id = :id`,
-        args: { ...deal, id }
+        args: { ...deal, id: Number(id) }
       });
       
       if (result.rowsAffected > 0) {
@@ -41,7 +41,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
       const result = await db.execute({
         sql: 'DELETE FROM deals WHERE id = ?',
-        args: [id]
+        args: [Number(id)]
       });
       
       if (result.rowsAffected > 0) {

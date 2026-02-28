@@ -33,17 +33,25 @@ export function DealsProvider({ children }: { children: React.ReactNode }) {
     fetchDeals();
   }, []);
 
-  const fetchDeals = async () => {
+  const fetchDeals = async (retries = 3) => {
     try {
       const response = await fetch('/api/deals');
       if (response.ok) {
         const data = await response.json();
         setDeals(data);
       } else {
-        console.error('Failed to fetch deals');
+        console.error('Failed to fetch deals:', response.status);
+        if (retries > 0) {
+          console.log(`Retrying fetch deals... (${retries} attempts left)`);
+          setTimeout(() => fetchDeals(retries - 1), 1000);
+        }
       }
     } catch (error) {
       console.error('Error fetching deals:', error);
+      if (retries > 0) {
+        console.log(`Retrying fetch deals... (${retries} attempts left)`);
+        setTimeout(() => fetchDeals(retries - 1), 1000);
+      }
     }
   };
 
